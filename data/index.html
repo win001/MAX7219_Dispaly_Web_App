@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ LED Matrix Configuration @</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(45deg, #36D1DC 0%, #5B86E5 100%);
+            min-height: 100vh;
+        }
+        .input-group {
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #5B86E5;
+        }
+        .input-group:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+            border-left: 5px solid #36D1DC;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #2d3436;
+            font-weight: 600;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        input {
+            width: 95%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        input:focus, select:focus {
+            border-color: #5B86E5;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(91,134,229,0.2);
+            background-color: white;
+        }
+        button {
+            background: linear-gradient(45deg, #36D1DC 30%, #5B86E5 90%);
+            color: white;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 40px auto;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(91,134,229,0.3);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91,134,229,0.4);
+            background: linear-gradient(45deg, #5B86E5 30%, #36D1DC 90%);
+        }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B86E5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <h1>LED Matrix Controller</h1>
+    <div class="container">
+    <form id="configForm" onsubmit="submitForm(event)">
+        <div class="input-group">
+            <label>Please enter the text to display:</label>
+            <input type="text" name="displayText" value="Hello! Enter new message" required>
+        </div>
+
+        <div class="input-group">
+            <label>Select the text scrolling alignment:</label>
+            <select name="alignment" required>
+                <option value="0" selected>LEFT_ALIGN</option>
+                <option value="1">CENTER_ALIGN</option>
+                <option value="2">RIGHT_ALIGN</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Enter the scrolling delay(speed) in milliseconds:</label>
+            <input type="number" name="scrollDelay" value="25" required>
+        </div>
+
+        <div class="input-group">
+            <label>Enter scrolling pause duration in millisecond:</label>
+            <input type="number" name="pauseDuration" value="2000" required>
+        </div>
+
+        <div class="input-group">
+            <label>Select scrolling IN effect:</label>
+            <select name="inEffect" required>
+                <option value="0">PA_NO_EFFECT</option>
+                <option value="1">PA_PRINT</option>
+                <option value="2">PA_SCROLL_UP</option>
+                <option value="3">PA_SCROLL_DOWN</option>
+                <option value="4" selected>PA_SCROLL_LEFT</option>
+                <option value="5">PA_SCROLL_RIGHT</option>
+                <option value="6">PA_SPRITE</option>
+                <option value="7">PA_SLICE</option>
+                <option value="8">PA_MESH</option>
+                <option value="9">PA_FADE</option>
+                <option value="10">PA_DISSOLVE</option>
+                <option value="11">PA_BLINDS</option>
+                <option value="12">PA_RANDOM</option>
+                <option value="13">PA_WIPE</option>
+                <option value="14">PA_WIPE_CURSOR</option>
+                <option value="15">PA_SCAN_HORIZ</option>
+                <option value="16">PA_SCAN_HORIZX</option>
+                <option value="17">PA_SCAN_VERT</option>
+                <option value="18">PA_SCAN_VERTX</option>
+                <option value="19">PA_OPENING</option>
+                <option value="20">PA_OPENING_CURSOR</option>
+                <option value="21">PA_CLOSING</option>
+                <option value="22">PA_CLOSING_CURSOR</option>
+                <option value="23">PA_SCROLL_UP_LEFT</option>
+                <option value="24">PA_SCROLL_UP_RIGHT</option>
+                <option value="25">PA_SCROLL_DOWN_LEFT</option>
+                <option value="26">PA_SCROLL_DOWN_RIGHT</option>
+                <option value="27">PA_GROW_UP</option>
+                <option value="28">PA_GROW_DOWN</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Select scrolling OUT effect:</label>
+            <select name="outEffect" required>
+                <option value="0">PA_NO_EFFECT</option>
+                <option value="1">PA_PRINT</option>
+                <option value="2">PA_SCROLL_UP</option>
+                <option value="3">PA_SCROLL_DOWN</option>
+                <option value="4" selected>PA_SCROLL_LEFT</option>
+                <option value="5">PA_SCROLL_RIGHT</option>
+                <option value="6">PA_SPRITE</option>
+                <option value="7">PA_SLICE</option>
+                <option value="8">PA_MESH</option>
+                <option value="9">PA_FADE</option>
+                <option value="10">PA_DISSOLVE</option>
+                <option value="11">PA_BLINDS</option>
+                <option value="12">PA_RANDOM</option>
+                <option value="13">PA_WIPE</option>
+                <option value="14">PA_WIPE_CURSOR</option>
+                <option value="15">PA_SCAN_HORIZ</option>
+                <option value="16">PA_SCAN_HORIZX</option>
+                <option value="17">PA_SCAN_VERT</option>
+                <option value="18">PA_SCAN_VERTX</option>
+                <option value="19">PA_OPENING</option>
+                <option value="20">PA_OPENING_CURSOR</option>
+                <option value="21">PA_CLOSING</option>
+                <option value="22">PA_CLOSING_CURSOR</option>
+                <option value="23">PA_SCROLL_UP_LEFT</option>
+                <option value="24">PA_SCROLL_UP_RIGHT</option>
+                <option value="25">PA_SCROLL_DOWN_LEFT</option>
+                <option value="26">PA_SCROLL_DOWN_RIGHT</option>
+                <option value="27">PA_GROW_UP</option>
+                <option value="28">PA_GROW_DOWN</option>
+            </select>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(result => alert(result))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
