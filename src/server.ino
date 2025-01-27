@@ -20,9 +20,9 @@ extern uint16_t scrollPause;
 
 // Fixed IP configuration
 IPAddress local_IP(192, 168, 1, 45);  // Change to your desired IP
-IPAddress gateway(192, 168, 29, 1);      // Your router's IP
+IPAddress gateway(192, 168, 29, 1);   // Your router's IP
 IPAddress subnet(255, 255, 255, 0);
-IPAddress dns(8, 8, 8, 8);             // Google DNS
+IPAddress dns(8, 8, 8, 8);            // Google DNS
 
 WebServer server(80);
 
@@ -35,21 +35,30 @@ void serverSetup() {
     return;
   }
 
+  // Connect to Wi-Fi network with SSID and password
+  Serial.print("Setting AP (Access Point)…");
+  // Remove the password parameter, if you want the AP (Access Point) to be open
+  WiFi.softAP(ssid, NULL);
+
+  IPAddress IP = WiFi.softAPIP();
+  Serial.print("AP IP address: ");
+  Serial.println(IP);
+
   // Configure static IP
   // if (!WiFi.config(local_IP, gateway, subnet, dns)) {
   //   Serial.println("STA Failed to configure");
   // }
 
-  // Connect to Wi-Fi
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi...");
-  }
-  Serial.println("Connected to WiFi");
-  Serial.print("IP Address: ");
-  Serial.println(WiFi.localIP());
+  // // Connect to Wi-Fi
+  // WiFi.mode(WIFI_STA);
+  // WiFi.begin(ssid, password);
+  // while (WiFi.status() != WL_CONNECTED) {
+  //   delay(1000);
+  //   Serial.println("Connecting to WiFi...");
+  // }
+  // Serial.println("Connected to WiFi");
+  // Serial.print("IP Address: ");
+  // Serial.println(WiFi.localIP());
 
   // Initialize mDNS
   if (!MDNS.begin("ledmatrix")) {   // Set the hostname to "esp32.local"
