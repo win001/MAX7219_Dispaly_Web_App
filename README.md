@@ -48,3 +48,12 @@ Contributions, bug reports, and feature requests are welcome! Feel free to submi
 
 ![MAX7219 Display](assets/ledmatrix.jpeg)
 
+**Fig 2: MAX7219 display animation**
+
+![Demo](assets/animation.gif)
+
+**Fig 3: MAX7219 display animation**
+
+![Demo](assets/scrolling_text.gif)
+
+
